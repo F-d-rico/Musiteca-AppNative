@@ -18,7 +18,7 @@ function LogoM() {
 const HomeScreen = () => {
 
   const [search, setSearch] = useState('');
-  const [albumesFiltrados, setAlbumesFiltrados] = useState([]);
+  const [albumesFiltrados, setAlbumesFiltrados] = useState();
   const [albumes, setAlbumes] = useState([]);
 
   useEffect(() => {
@@ -47,7 +47,6 @@ const HomeScreen = () => {
       }); */
       setAlbumesFiltrados(busqueda);
       setSearch(text);
-      console.log(albumesFiltrados);
     } else {
       setAlbumesFiltrados(albumes);
       setSearch(text);
@@ -119,6 +118,7 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 32,
     paddingHorizontal: 16,
+    paddingVertical: 32,
     backgroundColor: '#F9EEDE',
     borderRadius: 16,
     gap: 16,
@@ -137,6 +137,7 @@ const cardStyles = StyleSheet.create({
       borderBottomColor: '#2C1C04',
       alignItems: 'center',
       flex:1,
+      backgroundColor: '#F9EEDE',
   },
   
   linkTapa: {

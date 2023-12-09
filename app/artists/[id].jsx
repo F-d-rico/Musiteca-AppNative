@@ -1,7 +1,7 @@
 import { ALBUMS_API } from 'react-native-dotenv';
 import React, { useEffect, useState } from 'react';
-import { Text, Image, ScrollView, View, StyleSheet, Link } from 'react-native';
-import { useLocalSearchParams,  Stack } from 'expo-router';
+import { Text, Image, ScrollView, View, StyleSheet, ImageBackground } from 'react-native';
+import { useLocalSearchParams, Link, Stack } from 'expo-router';
 import CardAlbum from "../../components/CardAlbum/CardAlbum";
 
 const ArtistPage = () => {
@@ -31,12 +31,18 @@ const ArtistPage = () => {
           headerShown: true,
         }}
       />
-      <Image src={artista.image} style={{width: '50%', resizeMode: 'contain'}} alt="imagen artista" />
-      <Text style={styles.h3}>{artista.name}</Text>
-      <Text style={styles.p}>Albums editados</Text>
-      {artista.albums.map(({id, name, artist="", cover, formats = ["none"], year}) => 
-      <Link href={`/albums/${album.id}`} key={album.id}>{album.name}</Link>
-      )}
+      <ImageBackground 
+          source={require(`../../assets/textura_madera.png`)}
+          style={[styles.back, {width:'100%', height:'100%'}]} resizeMode="repeat"> 
+        <View style={styles.listado}>
+          <Image source={artista.image} alt={artista.name} resizeMode='contain' style={styles.imagen}/>
+          <Text style={styles.h3}>{artista.name}</Text>
+          <Text style={styles.p}>Albums editados</Text>
+          {artista.albums.map((album/* {id, name, artist="", cover, formats = ["none"], year} */) => 
+          <Link href={`/albums/${album.id}`} key={album.id}>{album.name}</Link>
+          )}
+      </View>
+      </ImageBackground>
       {/* <View key={id}>
         <CardAlbum name={name} id={id} artist={artist} cover={cover} formats={formats} year={year} cardArtista={true}/>
       </View> */}
@@ -51,11 +57,41 @@ const styles = StyleSheet.create({
       marginVertical: 8,
   },
 
+  back: {
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  listado: {
+    width: '90%',
+    height: '100%',
+    flex: 1,
+    margin: 32,
+    paddingHorizontal: 16,
+    paddingBottom: 64,
+    backgroundColor: '#F9EEDE',
+    borderRadius: 16,
+    gap: 16,
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+
   h3: {
     fontSize: 20,
     fontFamily: 'Quicksand_700Bold',
-    marginVertical: 24,
+    marginTop: 16,
+    /* color: '#F9EEDE', */
+    textAlign: 'center',
   },
+
+  imagen: {
+    margin: 8,
+    width: 256,
+    height: 128,
+    borderRadius: 8,
+    marginTop: 64,
+},
 
   p: {
     fontSize: 16,

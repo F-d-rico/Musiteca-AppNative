@@ -47,7 +47,7 @@ export default function HomeLayout() {
     return <AppLoading />;
   } else { */
   return (
-    <SafeAreaProvider style={styles.container}>
+    <SafeAreaProvider style={styles.container} onLayout={onLayoutRootView}>
       <ImageBackground 
         source={require(`../assets/textura_madera.png`)}
         style={[styles.back, {width:'100%'}]} resizeMode="repeat">
